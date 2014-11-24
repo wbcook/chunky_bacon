@@ -19,15 +19,13 @@ class LotteryTicket
 		new( rand( 25 ) + 1, rand( 25 ) + 1, rand( 25 ) + 1 )
 	rescue ArgumentError
 	end
-end
 
-class LotteryDraw
-	@@tickets = {}
-	def LotteryDraw.buy( customer, *tickets )
-		unless @@tickets.has_key?( customer )
-			@@tickets[customer] = []
+	def score( final )
+		count = 0
+		final.picks.each do |note|
+			count +=1 if picks.include? note
 		end
-		@@tickets[customer] += tickets
+		count
 	end
 end
 
@@ -35,7 +33,7 @@ ticket = LotteryTicket.new( rand( 25 ) + 1,
 	rand( 25 ) + 1, rand( 25 ) + 1 )
 p ticket.picks
 
-LotteryDraw.buy 'Yal-dal-rip-sip',
-	LotteryTicket.new( 12, 6, 19),
-	LotteryTicket.new( 5, 1, 3 ),
-	LotteryTicket.new( 24, 6, 8)
+ticket2 = LotteryTicket.new( 2, 5, 19 )
+winner = LotteryTicket.new( 4, 5, 19 )
+puts ticket2.score( winner )
+
