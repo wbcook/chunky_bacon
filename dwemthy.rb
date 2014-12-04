@@ -44,9 +44,11 @@ class Dragon < Creature
   weapon 939    # fire breath
 end
 
-smog = Dragon.new
-smog.weapon = 9000
-puts smog.life
-puts smog.strength
-puts smog.charisma
-puts smog.weapon
+print "What monster class have you come to battle?"
+monster, drgn = gets.chomp
+eval( "drgn = #{monster}.new" )
+p drgn
+print "What is #{monster}'s name?"
+monster_name = gets.chomp
+monster.instance_eval { @name= monster_name }
+p monster.instance_variable_get( "@name" )
